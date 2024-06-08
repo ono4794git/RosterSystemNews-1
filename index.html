@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="勤務作成システム自動実行マクロ解除および代替ボタン作成">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>勤務作成システム NEWS</title>
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <!--<link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">-->
+
+    <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+
+    <header class="page-header header-wrapper">
+        <div class="header-container">
+             <h1><img class="logo" src="images/タイトルIMG.gif" alt=""></h1>
+             <h1 class="page-title">システムNews</h1>
+        </div>
+    </header>
+    <div class="page-content wrapper">
+        <h2>勤務システムの修正（自動実行マクロの中止および新規ボタンの設置）</h2>
+        <h5>2024/06/10 vol.1</h5>    
+       
+        <div class="page-main">
+            <article>
+                <ol>
+                    <!--1.-->
+                    <li class="list-main">概要</li>
+                    <p>現在の勤務システムは自動実行マクロを使用して初期設定を行っていますが、ボタン押下での実施に変更します。<br></p>
+                    <p>今回の修正の理由は、エクセルの立ち上げがストップされる原因のひとつに開始時自動実行マクロがあるのではという考えからです。</p>
+                    <!--2.-->
+                    <li class="list-main">修正方法</li>
+                        <ul>
+                            <!--(1)-->
+                            <li class="list-sub">(1) VBAをOPENして標準モジュールフォルダー上で右クリックしてメニューを表示。<br>
+                                挿入-標準モジュールを選択して、新規標準モジュールを作成する。<br>
+                                （作成される標準モジュールには自動で番号が振られますので例とは違うかもしれません）<br>
+                                モジュール内の一行目「Option Explicit」の文字はDELETEしてください。
+                            </li>
+                            <!--<img src="images\img1新規標準モジュール追加.gif" alt="標準モジュール選択">-->
+                            <!--(2)-->
+                            <li class="list-sub">(2) ThisWorkbookをダブルクリックして表示。<br>
+                                自動実行マクロ 265行目付近'Private Sub Workbook_Open()'～300行目付近'End Sub'までを選択してコピーします。</li>
+                                <!--<img src="images\img2標準モジュールが追加された.gif" alt="標準モジュール追加">-->
+                        
+                                <!--<img src="images\img3自動実行マクロをコピー.gif" alt="マクロのコピー">-->
+                            <!--(3)-->
+                            <li class="list-sub">(3) 作成した標準モジュールにマクロをペースト(CTRL + V)する。 </li>
+                                <!--<img src="images\img4ペーストした.gif" alt="マクロをペースト">-->
+                            <!--(4)-->
+                                <li class="list-sub">(4) ペーストしたマクロを修正する。</li>
+                                <ul>
+                                    <!--①-->
+                                    <li class="list-sub2">① 名前を変更します。</li>
+                                        <p>'Private'の文字を消して'Sub Workbook_Open()'を'Sub Set_Start()' に変更してください。<br>
+                                               Sub Set_Start() </p>
+                                    <!--<img src="images\img5名前の変更.gif" alt="名前を変更">-->
+                                    <!--②-->
+                                    <li class="list-sub2">②メッセージコマンドを記入します。</li>
+                                        <p>最終行のEnd Sub の上に下記を記入します。</p>
+                                        <p>MsgBox "勤務システム初期設定完了！"</p>
+                                        <p>※MsgBox の文字は半角かつ大文字小文字も例の通り記入し半角スペースを入れた後に半角ダブルクオーテーション「"」でメッセージを挟みます。</p>
+                                        <p>メッセージ内容はシステム設定が終了したことが分かれば何でも良いです。</p>
+                                    <!--<img src="images\img11MsgBox記入.gif" alt="MsgBox記入">-->
+                                </ul>                    
+            
+                            <!--(5)-->
+                                <li class="list-sub">(5) コピー元のThisWorkbook自動実行マクロ'Private Sub Workbook_Open()～End Sub'はコメントアウトしてください。</li>
+                            <!--<img src="images\img6コメントアウトする.gif" alt="自動実行マクロをコメントアウト">-->
+                            
+                            <!--(6)-->
+                                <li class="list-sub">(6) マクロボタンの設定：《0-HOME》シートのタイトル[勤務表作成ファイル]にマクロを登録します。</li>
+                                <ul>
+                                    <li class="list-sub2">① 「システム管理者専用」ボタンで保護を外します。</li>
+                                    <li class="list-sub2">② 開発タブ-デザインモードを選択します。</li>
+                                    <!--<img src="images\img7デザインモードにする.gif" alt="デザインモードにする">-->
+                                    <li class="list-sub2">③ タイトル[勤務表作成ファイル]で右クリックをして選択状態にします。</li>
+                                    <!--<img src="images\img8右クリックで選択状態にする.gif" alt="選択状態にする">-->
+                                    <li class="list-sub2">④ ポップアップメニューの[マクロの登録]を選択します。</li>
+                                    <!--<img src="images\img9マクロの登録を選択.gif" alt="マクロの登録を選択">-->
+                                    <li class="list-sub2">⑤ 先ほど作成した[Set_Start]を選択して[OK]ボタンを押します。</li>
+                                    <!--<img src="images\img10setstartマクロでok.gif" alt="作成したマクロを選択しOK">-->
+                                    <li class="list-sub2">⑥ 開発タブ-デザインモードをクリックして解除します。</li>
+                                </ul>
+                            <!--(7)-->
+                             <li class="list-sub">(7) ProtectAll で保護をかけてから動作を確認します。</li>
+                                <ul>
+                                    <li class="list-sub2">① タイトル[勤務表作成ファイル]をクリックしてポップアップに登録した文字が表示されるのを確認します。</li>
+                                    <li class="list-sub2">② ポップアップの[OK]ボタンで作業開始できることを確認します。</li>
+                                    <p>※動作がうまくいかない場合はご連絡ください。</p>
+                                </ul>
+                        </ul>
+                    <!--3.-->
+                    <li class="list-main">使用方法</li>
+                        <p>勤務作成システムを開いた際にタイトルをクリックしてから作業を開始します。 </p>
+                        <p>なお、このボタンでの設定はしなくても勤務作成に問題は発生しませんが、その場合は念のため「ProtectAll」をかけてから始めれば完全に問題はありません。</p>
+                        <p>この設定で行われるのは下記の項目です。</p>
+                        <ul>
+                            <li>① ドラッグアンドドロップをできないようにする。(入力時に手がすべるなどのエラー発生を予防するため)</li>
+                            <li>② 数式バーを表示しない。(勤務内容の表示部分を少しでも多くするため)</li>
+                            <li>③ オートコンプリートをストップする。(エクセルが自動で記号を入力するのを防ぐため)</li>
+                            <li>④ 各セルでEnterをしたときに自動的に下のセルに移動する動作をストップする。</li>
+                            <li>⑤ ステータスバーを表示させる。（一番左下に小さく「準備完了」と表示があるところ。ほとんど必要はないが）</li>     
+                            <li>⑥ スクロールロックを各シートごとの設定に応じてかける。</li>                    
+                            <li>⑦ すべてのシートに保護をかける。</li>
+                            <li>⑧《0-HOME》シートのウインドウ枠を固定する。</li>
+                        </ul>
+                        <p>概ね上記の作業になりますが重要なのは '⑦ 保護をかける' のみです。<br>
+                            保護についても管理者専用ボタンでの保護解除をしていなければ問題にならないはずです。<br>
+                            自分の使用しているエクセル設定を利用したい場合は、念のためにProtectAllだけをすれば、開始ボタンを押下せずに作業しても問題ありません。</p>
+                    <!--4.-->
+                    <li class="list-main">その他</li>
+                        <p>自動実行マクロは、上記で解除した開始時のマクロ以外にファイルクローズ時にも設定しています。<br>
+                        クローズ時には数式バーを表示してから閉じるなどを行っていますが、これは他のエクセルファイルを使用した際に、一般的な設定で開始できるようにするためです。<br>
+                        なお、このクローズ時の自動実行マクロもチェックされる可能性はあると思いますので、今回の対応だけでオープンできない問題が解決するかは分かりません。<br></p>
+                        <p>しかし修正によるデメリットもほとんどないため今回の変更としました。</p>
+                    </ol>
+
+            </article>
+
+            <aside>
+
+                <p class="img"><img class="popup" src="images\img1新規標準モジュール追加.gif" alt="標準モジュール選択"></p>
+                <p class="img-text">2.(1)標準モジュールフォルダー上で右クリックしてメニューを表示</p>
+              
+                <p class="img"><img class="popup" src="images\img2標準モジュールが追加された.gif" alt="標準モジュール追加"></p>              
+                <p class="img-text">2.(1)標準モジュールに自動で番号が振られる</p>
+          
+                <p class="img"><img class="popup" src="images\img3自動実行マクロをコピー.gif" alt="マクロのコピー"></p>              
+                <p class="img-text">2.(2)ThisWorkbookをダブルクリックして表示。</p>
+
+                <p class="img"><img class="popup" src="images\img4ペーストした.gif" alt="マクロをペースト"></p>              
+                <p class="img-text">2.(3) 作成した標準モジュールにマクロをペースト(CTRL + V)する。</p>
+
+                <p class="img"><img class="popup" src="images\img5名前の変更.gif" alt="名前を変更"></p>
+                <p class="img-text">2.(4) ペーストしたマクロを修正する。<br>'Sub Set_Start()'に変更</p>
+
+                <p class="img"><img class="popup" src="images\img11MsgBox記入.gif" alt="MsgBox記入"></p>
+                <p class="img-text">2.(4) End Sub の上にメッセージを記入<br> MsgBox "勤務システム初期設定完了！"</p>
+
+                <p class="img"><img class="popup" src="images\img6コメントアウトする.gif" alt="自動実行マクロをコメントアウト"></p>
+                <p class="img-text">2.(5) コピー元'Private Sub Workbook_Open()プロシージャ'をコメントアウト</p>
+
+                <p class="img"><img class="popup" src="images\img7デザインモードにする.gif" alt="デザインモードにする"></p>
+                <p class="img-text">2.(6)② デザインモードを選択</p>
+
+                <p class="img"><img class="popup" src="images\img8右クリックで選択状態にする.gif" alt="選択状態にする"></p>
+                <p class="img-text">2.(6)③ タイトルを右クリックで選択状態にする</p>
+
+                <p class="img"><img class="popup" src="images\img9マクロの登録を選択.gif" alt="マクロの登録を選択"></p>
+                <p class="img-text">2.(6)④ メニューからマクロの登録を選択</p>
+
+                <p class="img"><img class="popup" src="images\img10setstartマクロでok.gif" alt="作成したマクロを選択しOK"></p>
+                <p class="img-text">2.(6)⑤ [Set_Start]を選択して[OK]</p>
+
+            </aside>
+        </div>
+       
+    </div>
+    
+
+    <p><br></p>
+    <div id="modal" class="modal">
+        <span id="close">x</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script type="text/javascript" src="javascript.js" charset="UTF-8"></script>
+</body>
+</html>
