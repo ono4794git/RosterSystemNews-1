@@ -43,6 +43,7 @@ img {
     display: flex;
 }
 .page-title {
+  font-family: "ヒラギノ丸ゴ Pro W4", "Hiragino Maru Gothic Pro", sans-serif;
     position: absolute;    
     font-size:24px;
     color: white;
