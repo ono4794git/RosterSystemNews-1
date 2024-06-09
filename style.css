@@ -111,6 +111,9 @@ aside img {
 aside {
     margin-top: 40px;
 }
+aside .img-title {
+    font-size: 10px;
+}
 aside .img-text {
     font-size: 10px;
     text-align: left;
@@ -162,9 +165,13 @@ ul {
     position: absolute;
     top: 35px;
     right: 25px;
-    color: blue;
-    opacity: 0.5;
-    font-size: 20px;
+    padding-right: 10px;
+    padding-left:10px;
+    color: white;
+    background-color: blue;
+    border-radius: 10px 10px 10px 10px;  
+    opacity: 0.75;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
