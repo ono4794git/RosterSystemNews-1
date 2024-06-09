@@ -43,7 +43,7 @@ img {
     display: flex;
 }
 .page-title {
-  font-family: "ヒラギノ丸ゴ Pro W4", "Hiragino Maru Gothic Pro", sans-serif;
+    font-family: "ヒラギノ丸ゴ Pro W4", "Hiragino Maru Gothic Pro", sans-serif;
     position: absolute;    
     font-size:24px;
     color: white;
@@ -63,26 +63,36 @@ img {
 h1 {
     color: rgb(8, 46, 53);
     font-family: "游ゴシック体", "Yu Gothic", "YuGothic";
-    
+    text-shadow: 1px 3px 3px #777777;
 }
 h2 {
     margin-bottom: 4px;
     text-align: center;
+    
 }
 h5 {
     text-align: right;
     margin-bottom: 12px;
 }
+
 article {
     width: 74%;
-    margin-left: 24px;
-    margin-right: 32px;
+    padding-left: 24px;
+    padding-right: 32px;
+    background-color: #ffffff;
+
 }
 
 aside {
-    width: 22%
+    width: 22%;
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: #f0f5f5;
+
 }
+
 aside img {
+    margin-left: 20px;
     margin-top: 20px;
     margin-bottom: 4px;
 }
@@ -138,7 +148,7 @@ ul {
     background-color: rgba(0,0,0,0,4); /*背景色を透過グレーに*/
     opacity: 0; /*初期状態*/
     visibility: hidden;
-    transition: opacity 0.75s, visibility 0.75s; /* アニメーション効果*/
+    transition: opacity 0.35s, visibility 0.35s; /* アニメーション効果*/
 }
 
 .modal-content {
