@@ -162,9 +162,9 @@ ul {
     position: absolute;
     top: 35px;
     right: 25px;
-    color: red;
+    color: blue;
     opacity: 0.5;
-    font-size: 50px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
 }
